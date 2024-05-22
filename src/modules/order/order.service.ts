@@ -28,6 +28,17 @@ const createOrderIntoDB = async (payload: TOrder) => {
   return result;
 };
 
+const getAllOrdersFromDB = async (query: any) => {
+  if (query) {
+    const result = await Order.find({ email: query });
+    return result;
+  }
+
+  const result = await Order.find({});
+  return result;
+};
+
 export const OrderServices = {
   createOrderIntoDB,
+  getAllOrdersFromDB,
 };
