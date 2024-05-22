@@ -5,7 +5,7 @@ import productValidationSchema from "./product.validation";
 const createProduct = async (req: Request, res: Response) => {
   try {
     const { product } = req.body;
-    const zodParseData = productValidationSchema.parse(product)
+    const zodParseData = productValidationSchema.parse(product);
     const result = await ProductServices.createProductIntoDB(zodParseData);
     res.status(200).json({
       success: true,
@@ -21,10 +21,10 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
-
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const result = await ProductServices.getAllProductsFromDB();
+    const query = req.query.searchTerm as string | undefined;
+    const result = await ProductServices.getAllProductsFromDB(query);
     res.status(200).json({
       success: true,
       message: "Products fetched successfully!",
@@ -40,10 +40,9 @@ const getAllProducts = async (req: Request, res: Response) => {
 };
 
 
-
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
-    const {productId} = req.params
+    const { productId } = req.params;
     const result = await ProductServices.getSingleProductFromDB(productId);
     res.status(200).json({
       success: true,
@@ -61,9 +60,12 @@ const getSingleProduct = async (req: Request, res: Response) => {
 
 const updateProduct = async (req: Request, res: Response) => {
   try {
-    const {productId} = req.params
-    const {productData} = req.body
-    const result = await ProductServices.updateProductIntoDB(productId, productData);
+    const { productId } = req.params;
+    const { productData } = req.body;
+    const result = await ProductServices.updateProductIntoDB(
+      productId,
+      productData
+    );
     res.status(200).json({
       success: true,
       message: "Product updated successfully!",
@@ -80,7 +82,7 @@ const updateProduct = async (req: Request, res: Response) => {
 
 const deleteProduct = async (req: Request, res: Response) => {
   try {
-    const {productId} = req.params
+    const { productId } = req.params;
     const result = await ProductServices.deleteProductIntoDB(productId);
     res.status(200).json({
       success: true,
@@ -97,9 +99,9 @@ const deleteProduct = async (req: Request, res: Response) => {
 };
 
 export const ProductControllers = {
-    createProduct,
-    getAllProducts,
-    getSingleProduct,
-    updateProduct,
-    deleteProduct
+  createProduct,
+  getAllProducts,
+  getSingleProduct,
+  updateProduct,
+  deleteProduct,
 };
