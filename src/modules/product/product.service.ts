@@ -1,4 +1,3 @@
-import { log } from "console";
 import { TProduct } from "./product.interface";
 import { Product } from "./product.model";
 
