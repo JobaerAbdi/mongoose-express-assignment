@@ -4,7 +4,7 @@ import orderValidationSchema from "./order.validation";
 
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const { orderData } = req.body;
+    const orderData = req.body;
     const zodParseData = orderValidationSchema.parse(orderData)
     const result = await OrderServices.createOrderIntoDB(zodParseData);
     res.status(200).json({
@@ -21,7 +21,7 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
-const getallOrder = async (req: Request, res: Response) => {
+const getAllOrder = async (req: Request, res: Response) => {
   try {
     const query = req.query.email
     const result = await OrderServices.getAllOrdersFromDB(query);
@@ -42,5 +42,5 @@ const getallOrder = async (req: Request, res: Response) => {
 
 export const OrderControllers = {
     createOrder,
-    getallOrder
+    getAllOrder
 }

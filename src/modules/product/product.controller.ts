@@ -4,7 +4,7 @@ import productValidationSchema from "./product.validation";
 
 const createProduct = async (req: Request, res: Response) => {
   try {
-    const { productData } = req.body;
+    const productData = req.body;
     const zodParseData = productValidationSchema.parse(productData);
     const result = await ProductServices.createProductIntoDB(zodParseData);
     res.status(200).json({
@@ -61,7 +61,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
 const updateProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    const { productData } = req.body;
+    const  productData  = req.body;
     const result = await ProductServices.updateProductIntoDB(
       productId,
       productData
