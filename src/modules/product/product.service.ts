@@ -1,39 +1,40 @@
+import { log } from "console";
 import { TProduct } from "./product.interface";
 import { Product } from "./product.model";
 
-const createProductIntoDB = async(payload: TProduct)=>{
-  const result = await Product.create(payload)
-  return result
+const createProductIntoDB = async (payload: TProduct) => {
+  const result = await Product.create(payload);
+  return result;
 };
 
-const getAllProductsFromDB = async()=>{
-  const result = await Product.find()
-  return result
+
+const getAllProductsFromDB = async () => {
+  const result = await Product.find();
+  return result;
 };
 
-const getSingleProductFromDB = async(id: string)=>{
-  const result = await Product.findById(id)
-  return result
+const getSingleProductFromDB = async (id: string) => {
+  const result = await Product.findById(id);
+  return result;
 };
 
-const updateProductIntoDB = async(id: string, payload: TProduct)=>{
-  const result = await Product.findByIdAndUpdate(
-    id,
-    payload,
-    {new: true, runValidators: true}
-  )
-  return result
+const updateProductIntoDB = async (id: string, payload: TProduct) => {
+  const result = await Product.findByIdAndUpdate(id, payload, {
+    new: true,
+    runValidators: true,
+  });
+  return result;
 };
 
-const deleteProductIntoDB = async(id: string)=>{
-  const result = await Product.deleteOne({_id: id})
-  return result
+const deleteProductIntoDB = async (id: string) => {
+  const result = await Product.deleteOne({ _id: id });
+  return result;
 };
 
-export const ProductServices =  {
-    createProductIntoDB,
-    getAllProductsFromDB,
-    getSingleProductFromDB,
-    updateProductIntoDB,
-    deleteProductIntoDB
+export const ProductServices = {
+  createProductIntoDB,
+  getAllProductsFromDB,
+  getSingleProductFromDB,
+  updateProductIntoDB,
+  deleteProductIntoDB,
 };
